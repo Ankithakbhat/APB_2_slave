@@ -1,48 +1,47 @@
-interface apb_if(input bit PCLK, input bit PRESETn);
+interface apb_master_if(input bit PCLK, input bit PRESETn);
 
   //----------- Parameter Definitions -------------//
   localparam int AW = 9;  // Address width
   localparam int DW = 8;  // Data width
 
-  //----------- APB Interface Signals -------------//
-  logic transfer;              // APB enable from system bus
-  logic [AW-1:0] PADDR;        // APB address
-  logic         PWRITE;       // Write enable
-  logic         PSEL1;        // Slave1 select
-  logic         PENABLE;      // Enable signal
-  logic [DW-1:0] PWDATA;      // Write data
-  logic [DW-1:0] PRDATA;      // Read data
-  logic         PREADY;       // Ready signal
-  logic         PSLVERR;      // Slave error
+  //----------- Master Control Inputs -------------//
+  logic transfer;                       // Initiate transfer
+  logic READ_WRITE;                     // 0 = read, 1 = write
+  logic [AW-1:0] apb_read_paddr;        // Read address
+  logic [AW-1:0] apb_write_paddr;       // Write address
+  logic [DW-1:0] apb_write_data;        // Write data
+
+  //----------- Master Output ---------------------//
+  logic [DW-1:0] apb_read_data_out;     // Read data output
 
   //----------- Driver Clocking Block -------------//
   clocking drv_cb @(posedge PCLK or negedge PRESETn);
     default input #1 output #1;
 
-    output transfer, PADDR, PWRITE, PSEL1, PENABLE, PWDATA;
-    input  PREADY, PRDATA, PSLVERR;
+    output transfer, READ_WRITE, apb_read_paddr, apb_write_paddr, apb_write_data;
+    input  apb_read_data_out;
   endclocking
 
   //----------- Monitor Clocking Block ------------//
   clocking mon_cb @(posedge PCLK or negedge PRESETn);
     default input #1 output #1;
 
-    input transfer, PADDR, PWRITE, PSEL1, PENABLE, PWDATA;
-    input PRDATA, PREADY, PSLVERR;
+    input transfer, READ_WRITE, apb_read_paddr, apb_write_paddr, apb_write_data;
+    input apb_read_data_out;
   endclocking
 
   //----------- Modport Declarations --------------//
   modport DRV (clocking drv_cb);
   modport MON (clocking mon_cb);
 
-  //----------- APB Protocol Assertions ------------//
+  //----------- Master Signal Assertion ------------//
 
-  // Assertion: PENABLE should be high one cycle after PSEL1 goes high
-  property psel_enable;
+  // Example Assertion: apb_write_paddr must not be X during transfer and write
+   property addr_valid_on_write;
     @(posedge PCLK) disable iff (!PRESETn)
-    $rose(PSEL1) |-> ##1 PENABLE;
+    (transfer && READ_WRITE) |-> !$isunknown(apb_write_paddr);
   endproperty
-  apb_enable_chk: assert property(psel_enable)
-    else $error("ASSERTION FAILED: PENABLE not high one cycle after PSEL1");
+  addr_valid_check: assert property(addr_valid_on_write)
+    else $error("ASSERTION FAILED: Write address is invalid during transfer");
 
 endinterface
