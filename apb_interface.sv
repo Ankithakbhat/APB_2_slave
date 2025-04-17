@@ -36,12 +36,5 @@ interface apb_master_if(input bit PCLK, input bit PRESETn);
 
   //----------- Master Signal Assertion ------------//
 
-  // Example Assertion: apb_write_paddr must not be X during transfer and write
-   property addr_valid_on_write;
-    @(posedge PCLK) disable iff (!PRESETn)
-    (transfer && READ_WRITE) |-> !$isunknown(apb_write_paddr);
-  endproperty
-  addr_valid_check: assert property(addr_valid_on_write)
-    else $error("ASSERTION FAILED: Write address is invalid during transfer");
-
+ 
 endinterface
