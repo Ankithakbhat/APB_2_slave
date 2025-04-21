@@ -1,4 +1,4 @@
-class apb_agent extends uvm_agent;
+class apb_agent_active extends uvm_agent;
 
   `uvm_component_utils(apb_agent)
 
