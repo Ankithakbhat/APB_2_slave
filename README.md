@@ -9,18 +9,29 @@ The design consists of a single APB master controlled by external signals, commu
 5.	PWRITE=1 indicates write PWDATA to slave. PWRITE=0 indicates read PRDATA from slave.
 6.	Start of data transmission is indicated when PENABLE changes from low to high. End of transmission is indicated by PREADY changes from high to low.
 Top Module Name: apb_protocol.v 
-APB Interface Block Diagram:
+##APB Interface Block Diagram:
 
 
 ![image](https://github.com/user-attachments/assets/ac5502b9-80ab-4490-bb9d-5f608a7522b9)
 
 
 
- 
-Operation Of APB
+##APB master-2slave connection
 
 
-![image](https://github.com/user-attachments/assets/b35ccd85-2582-4130-8327-a753b06c19bb)
+![image](https://github.com/user-attachments/assets/37ec113f-851e-4616-8b2e-7a7823da00a2)
+
+##Testbench Architecture
+
+
+![image](https://github.com/user-attachments/assets/4224cfe5-4d90-4504-a18b-e83045af6c3c)
+
+
+
+![image](https://github.com/user-attachments/assets/cf66b41f-54e4-416b-8de9-45491f8db9da)
+
+
+
 
 
 
