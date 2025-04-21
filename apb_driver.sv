@@ -31,7 +31,10 @@ class apb_driver extends uvm_driver#(apb_seq_item);
 
   // Drive task
   task drive();
-    // Add clocking block-based driving logic here
+  // Add clocking block-based driving logic here
+     if (vif.presetn == 0) begin
+    @(posedge vif.pclk);
+       // Drive the signals to reset.
   endtask
 
 endclass
