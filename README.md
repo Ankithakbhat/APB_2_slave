@@ -20,6 +20,10 @@ APB Interface Block Diagram:
 Operation Of APB
 
 
+![image](https://github.com/user-attachments/assets/b35ccd85-2582-4130-8327-a753b06c19bb)
+
+
+
 
 
  
