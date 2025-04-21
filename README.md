@@ -11,17 +11,15 @@ The design consists of a single APB master controlled by external signals, commu
 Top Module Name: apb_protocol.v 
 APB Interface Block Diagram:
 
-![image](https://github.com/user-attachments/assets/001a39ed-1c4a-43aa-8d63-b77a16339d32)
+
+![image](https://github.com/user-attachments/assets/ac5502b9-80ab-4490-bb9d-5f608a7522b9)
+
 
 
  
 Operation Of APB
 
-![image](https://github.com/user-attachments/assets/a9438bbe-b598-4394-9191-2c8b337a1bda)
 
-
-
-![image](https://github.com/user-attachments/assets/5303d873-1e5b-421d-a65d-062cf338e719)
 
 
  
