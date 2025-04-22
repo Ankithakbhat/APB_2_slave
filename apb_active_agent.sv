@@ -1,30 +1,22 @@
-class apb_agent_active extends uvm_agent;
+//======================================================//
+//              APB Sequencer Definition                //
+//======================================================//
 
-  `uvm_component_utils(apb_agent)
+// This class is the sequencer in UVM. It controls the flow of apb_seq_item
+// objects from the sequence to the driver.
 
-  // Component handles
-  apb_driver     drv;
-  apb_sequencer  seqr;
-  apb_monitor    mon;
+class apb_sequencer extends uvm_sequencer#(apb_seq_item);
 
-  // Constructor
+  //==================================================//
+  // UVM Factory Registration                         //
+  // Allows this component to be created using type names
+  `uvm_component_utils(apb_sequencer)
+
+  //==================================================//
+  // Constructor                                      //
+  // Initializes the sequencer and connects it to its parent in hierarchy
   function new(string name, uvm_component parent);
-    super.new(name, parent);
-  endfunction
-
-  // Build phase
-  function void build_phase(uvm_phase phase);
-    super.build_phase(phase);
-    
-    drv  = apb_driver::type_id::create("drv", this);
-    seqr = apb_sequencer::type_id::create("seqr", this);
-    mon  = apb_monitor::type_id::create("mon", this);
-  endfunction
-
-  // Connect phase
-  function void connect_phase(uvm_phase phase);
-    if (get_is_active() == UVM_ACTIVE)
-      drv.seq_item_port.connect(seqr.seq_item_export);
+    super.new(name, parent); // Call the base class constructor
   endfunction
 
 endclass
