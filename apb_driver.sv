@@ -61,7 +61,6 @@ class apb_driver extends uvm_driver#(apb_seq_item);
     `DRV_if.apb_write_paddr<= req.apb_write_paddr;
     `DRV_if.apb_write_data <= req.apb_write_data;
 
-    // Optionally, wait some cycles or drive protocol-specific sequences
-    // You could insert logic for PSEL, PENABLE, etc. depending on APB implementation
+    
 endtask
 endclass
