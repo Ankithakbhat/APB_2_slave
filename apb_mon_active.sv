@@ -40,13 +40,6 @@ class apb_mon_active extends uvm_monitor;
     forever begin
       @(posedge vif.pclk);
 
-      // Only monitor when psel and penable are high => valid phase
-      if (vif.psel && vif.penable) begin
-        trans = apb_seq_item::type_id::create("trans");
-
-        // Common field: transaction active
-        trans.transfer = 1;
-
         if (vif.pwrite) begin
           // Write operation
           trans.READ_WRITE     = 1;
