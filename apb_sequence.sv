@@ -29,39 +29,4 @@ class apb_sequence extends uvm_sequence#(apb_seq_item);
 
 endclass
 
-//------------------WRITE SEQUENCE------------------//
-class write_seq extends uvm_sequence#(apb_seq_item);
 
-  // Registering the class with UVM factory for object creation and management
-  `uvm_object_utils(write_seq)
-
-  // Constructor for initializing the write sequence with a given name (default is "write_seq")
-  function new(string name = "write_seq");
-    super.new(name); // Call to parent class constructor
-  endfunction
-
-  // Main sequence body: Logic for APB write transaction
-  virtual task body();
-    // Define and implement write transaction logic here
-  endtask
-
-endclass
-
-
-//------------------READ SEQUENCE------------------//
-class read_seq extends uvm_sequence#(apb_seq_item);
-
-  // Registering the class with UVM factory for object creation and management
-  `uvm_object_utils(read_seq)
-
-  // Constructor for initializing the read sequence with a given name (default is "read_seq")
-  function new(string name = "read_seq");
-    super.new(name); // Call to parent class constructor
-  endfunction
-
-  // Main sequence body: Logic for APB read transaction
-  virtual task body();
-    // Define and implement read transaction logic here
-  endtask
-
-endclass
