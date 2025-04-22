@@ -4,7 +4,7 @@ class apb_seq_item extends uvm_sequence_item;
   // These are the signals that will be randomized to generate transactions
 
   rand  bit         transfer;           // 1 = Start transaction, 0 = Idle
-  rand  bit         READ_WRITE;         // 0 = Read operation, 1 = Write operation
+  rand  bit         READ_WRITE;         // 1 = Read operation, 0 = Write operation
   rand  bit [8:0]   apb_read_paddr;     // Address for Read operation
   rand  bit [8:0]   apb_write_paddr;    // Address for Write operation
   rand  bit [7:0]   apb_write_data;     // Data to be written during Write
