@@ -59,6 +59,6 @@ interface apb_master_if(input bit PCLK, input bit PRESETn);
   //----------- Master Signal Assertion ------------//
   // [Optional space to add assertions to verify protocol correctness]
   // You can write SystemVerilog assertions here to check protocol compliance,
-  // e.g., check that apb_write_data is valid only when transfer is high, etc.
+  
 
 endinterface
