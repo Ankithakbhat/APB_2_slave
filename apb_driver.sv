@@ -59,7 +59,7 @@ class apb_driver extends uvm_driver#(apb_seq_item);
     // Wait for a clock edge and begin driving signals from req
     @(posedge vif.pclk);
 
-    // Example driving logic (to be elaborated in real use):
+    //  driving logic 
     `DRV_if.transfer       <= req.transfer;
     `DRV_if.READ_WRITE     <= req.READ_WRITE;
     `DRV_if.apb_read_paddr <= req.apb_read_paddr;
