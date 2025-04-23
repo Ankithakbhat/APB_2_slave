@@ -40,7 +40,7 @@ class write_seq extends uvm_sequence#(apb_seq_item);
   virtual task body();
     req = apb_seq_item::type_id::create("req");
     wait_for_grant();
-    req.randomize()with{ req.READ_WRITE == 0; req.apb_write_paddr[8]==1;};//req.i_paddr inside {5'd2,5'd8};
+    req.randomize()with{ req.transfer && req.READ_WRITE == 1 && req.apb_write_paddr[8]==1;};
     send_request(req);
     wait_for_item_done();
   endtask
