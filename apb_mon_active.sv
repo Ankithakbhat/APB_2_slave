@@ -40,17 +40,17 @@ class apb_mon_active extends uvm_monitor;
     forever begin
       @(posedge vif.pclk);
 
-        if (vif.pwrite) begin
-          // Write operation
+      if (vif.READ_WRITE) begin
+          // Read operation
           trans.READ_WRITE     = 1;
-          trans.apb_write_paddr = vif.paddr[8:0];     // Lower 9 bits for 9-bit address
-          trans.apb_write_data  = vif.pwdata[7:0];    // Lower 8 bits for 8-bit data
+          trans.apb_write_paddr = vif.apb_write_paddr;   
+          trans.apb_write_data  = vif.apb_write_data;    
         end
         else begin
-          // Read operation
+          // Write operation
           trans.READ_WRITE      = 0;
-          trans.apb_read_paddr  = vif.paddr[8:0];
-          trans.apb_read_data_out = vif.prdata[7:0];  // Sampled read data
+          trans.apb_read_paddr  = vif.apb_read_paddr;
+          trans.apb_read_data_out = vif.apb_read_data_out;  
         end
 
         // Send transaction through analysis port
