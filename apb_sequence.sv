@@ -29,4 +29,22 @@ class apb_sequence extends uvm_sequence#(apb_seq_item);
 
 endclass
 
+class write_seq extends uvm_sequence#(apb_seq_item);
+ 
+  `uvm_object_utils(write_seq)
+  
+  function new(string name = "write_seq");
+    super.new(name);
+  endfunction
+
+  virtual task body();
+    req = apb_seq_item::type_id::create("req");
+    wait_for_grant();
+    req.randomize()with{ req.READ_WRITE == 0; req.apb_write_paddr inside {};};//req.i_paddr inside {5'd2,5'd8};
+    send_request(req);
+    wait_for_item_done();
+  endtask
+endclass
+
+
 
