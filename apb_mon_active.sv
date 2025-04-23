@@ -44,7 +44,7 @@ class apb_mon_active extends uvm_monitor;
          trans = apb_seq_item::type_id::create("trans");
 
           // Read operation
-          trans.READ_WRITE     = 0;
+          trans.READ_WRITE     = 1;
           trans.apb_write_paddr = vif.apb_write_paddr;   
           trans.apb_write_data  = vif.apb_write_data;    
         end
