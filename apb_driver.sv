@@ -49,6 +49,11 @@ class apb_driver extends uvm_driver#(apb_seq_item);
     if (vif.presetn == 0) begin
       @(posedge vif.pclk);
       // Reset logic could go here if needed
+      `DRV_if.transfer       <= `b0;
+    `DRV_if.READ_WRITE     <= `bz;
+    `DRV_if.apb_read_paddr <= `bz;
+    `DRV_if.apb_write_paddr<= `bz;
+    `DRV_if.apb_write_data <= `b0;
     end
 
     // Wait for a clock edge and begin driving signals from req
