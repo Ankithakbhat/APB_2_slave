@@ -40,19 +40,13 @@ class apb_mon_active extends uvm_monitor;
     forever begin
       @(posedge vif.pclk);
 
-      if (vif.READ_WRITE) begin
+      if (!vif.READ_WRITE) begin
          trans = apb_seq_item::type_id::create("trans");
 
           // Read operation
-          trans.READ_WRITE     = 1;
+          trans.READ_WRITE     = 0;
           trans.apb_write_paddr = vif.apb_write_paddr;   
           trans.apb_write_data  = vif.apb_write_data;    
-        end
-        else begin
-          // Write operation
-          trans.READ_WRITE      = 0;
-          trans.apb_read_paddr  = vif.apb_read_paddr;
-          trans.apb_read_data_out = vif.apb_read_data_out;  
         end
 
         // Send transaction through analysis port
