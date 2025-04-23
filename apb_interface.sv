@@ -31,6 +31,7 @@ interface apb_master_if(input bit PCLK, input bit PRESETn);
 
     // Input signal to capture the data read from the slave
     input  apb_read_data_out;
+    input presetn;
   endclocking
 
   //----------- Monitor Clocking Block ------------//
