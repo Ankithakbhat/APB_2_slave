@@ -40,7 +40,7 @@ class apb_mon_active extends uvm_monitor;
     forever begin
       @(posedge vif.pclk);
 
-      if (!vif.READ_WRITE) begin
+      if (vif.transfer && vif.READ_WRITE) begin
          trans = apb_seq_item::type_id::create("trans");
 
           // Read operation
